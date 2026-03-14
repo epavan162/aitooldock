@@ -1006,6 +1006,28 @@
     display: none;
   }
 
+  .hero-content {
+    padding-top: 40px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .search-wrap {
+    width: 100%;
+    max-width: none;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding-left: 36px;
+  }
+
+  .search-icon {
+    left: 12px;
+  }
+
   .cat-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
