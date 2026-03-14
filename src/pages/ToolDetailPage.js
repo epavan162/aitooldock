@@ -26,6 +26,28 @@ export default function ToolDetailPage() {
     const handleScroll = () => setScrolled(window.scrollY > 140);
     window.addEventListener('scroll', handleScroll);
 
+    // Scroll Spy Logic
+    const observerOptions = {
+      root: null,
+      rootMargin: '-15% 0px -75% 0px', // Adjust trigger thresholds
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveTab(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = ['overview', 'how-it-works', 'use-cases', 'features', 'pros-cons', 'tips'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
     // Dynamic SEO
     if (tool) {
       document.title = `${tool.name} | ${tool.tagline} | AIToolDock`;
@@ -37,6 +59,7 @@ export default function ToolDetailPage() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
       // Reset SEO on unmount
       document.title = 'AIToolDock | Discover the Future of AI Tools';
       const metaDescription = document.querySelector('meta[name="description"]');
