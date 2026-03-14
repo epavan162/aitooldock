@@ -23,9 +23,11 @@ const Header = () => {
                 ← All Tools
               </Link>
             )}
-            <Link to="/about" className="nav-link">
-              About Creator
-            </Link>
+            {isHome && (
+              <Link to="/about" className="nav-link">
+                About Creator
+              </Link>
+            )}
             <div className="nav-badge">{tools.length} Tools</div>
           </nav>
           <ThemeToggle />
