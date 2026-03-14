@@ -1,0 +1,198 @@
+.about-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+}
+
+.about-container {
+    padding: 80px 24px;
+    flex: 1;
+    max-width: 900px;
+}
+
+.about-hero {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.about-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-lead {
+    font-size: 1.35rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+.about-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.about-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-lg), 0 0 0 1px var(--accent-dim);
+    transform: translateY(-4px);
+    background: var(--bg-card-hover);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.card-icon {
+    font-size: 2rem;
+}
+
+.card-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.card-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.contact-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+}
+
+.contact-btn:hover {
+    transform: translateX(4px);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+.whatsapp {
+    color: #25D366;
+    border-color: rgba(37, 211, 102, 0.2);
+}
+
+.whatsapp:hover {
+    background: rgba(37, 211, 102, 0.1);
+    border-color: #25D366;
+}
+
+.linkedin {
+    color: #0077b5;
+    border-color: rgba(0, 119, 181, 0.2);
+}
+
+.linkedin:hover {
+    background: rgba(0, 119, 181, 0.1);
+    border-color: #0077b5;
+}
+
+.github {
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+
+.github:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+}
+
+.portfolio {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+}
+
+.portfolio:hover {
+    background: var(--accent-dim2);
+    border-color: var(--accent);
+}
+
+.email {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.2);
+}
+
+.email:hover {
+    background: rgba(250, 204, 21, 0.1);
+    border-color: #facc15;
+}
+
+.submit-box {
+    margin-top: 24px;
+    padding: 24px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent);
+}
+
+.submit-note {
+    font-weight: 500;
+    margin-bottom: 8px !important;
+}
+
+.submit-email {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.submit-email:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .about-card {
+        padding: 24px;
+    }
+}
