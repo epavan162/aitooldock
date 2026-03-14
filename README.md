@@ -1,5 +1,5 @@
 # AIToolDock ◈
-**Live Demo:** [https://aitooldock.netlify.app/](https://aitooldock.netlify.app/)
+**Live Demo:** [https://aitooldock.netlify.app/](https://aitooldock.netlify.app)
 
 ## What is AIToolDock?
 **AIToolDock** is a premium, curated digital directory designed to navigate the rapidly evolving landscape of Artificial Intelligence. It serves as a sophisticated bridge between raw innovation and practical implementation, offering users an elite selection of the most powerful AI tools available today.
