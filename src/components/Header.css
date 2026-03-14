@@ -104,15 +104,19 @@
 
 @media (max-width: 600px) {
   .header-inner {
-    padding: 0 16px;
+    padding: 0 12px;
+  }
+
+  .logo {
+    gap: 6px;
   }
 
   .logo-text {
-    display: none;
+    font-size: 16px;
   }
 
   .nav {
-    gap: 8px;
+    gap: 6px;
   }
 
   .nav-badge {
@@ -121,7 +125,18 @@
 
   .nav-link,
   .nav-back {
-    font-size: 13px;
-    padding: 6px 10px;
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .nav-link,
+  .nav-back {
+    padding: 5px 6px;
   }
 }
