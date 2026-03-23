@@ -16,11 +16,15 @@ jobs:
           path: code
 
       - name: Checkout Automation Repository
-        uses: actions/checkout@v4
-        with:
-          repository: ShobhaRani133/playwright-typescript-aitoolhub
-          token: ${{ secrets.AUTOMATION_REPO_TOKEN }}
-          path: automation
+        env:
+          AUTOMATION_TOKEN: ${{ secrets.AUTOMATION_REPO_TOKEN }}
+        run: |
+          if [ -z "$AUTOMATION_TOKEN" ]; then
+            echo "Error: AUTOMATION_REPO_TOKEN secret is not set in this repository (epavan162/aitooldock)."
+            echo "Please ensure you have added it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          git clone https://x-access-token:$AUTOMATION_TOKEN@github.com/ShobhaRani133/playwright-typescript-aitoolhub.git automation
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
