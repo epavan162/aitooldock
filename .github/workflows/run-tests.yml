@@ -17,10 +17,10 @@ jobs:
 
       - name: Checkout Automation Repository
         env:
-          AUTOMATION_TOKEN: ${{ secrets.AUTOMATION_REPO_TOKEN }}
+          AUTOMATION_TOKEN: ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}
         run: |
           if [ -z "$AUTOMATION_TOKEN" ]; then
-            echo "Error: AUTOMATION_REPO_TOKEN secret is not set in this repository (epavan162/aitooldock)."
+            echo "Error: AUTOMATION_TRIGGER_TOKEN secret is not set in this repository (epavan162/aitooldock)."
             echo "Please ensure you have added it in Settings > Secrets and variables > Actions."
             exit 1
           fi
