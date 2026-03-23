@@ -1,0 +1,49 @@
+name: Multi-Repo Playwright Tests
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          path: code
+
+      - name: Checkout Automation Repository
+        uses: actions/checkout@v4
+        with:
+          repository: ShobhaRani133/playwright-typescript-aitoolhub
+          token: ${{ secrets.AUTOMATION_REPO_TOKEN }}
+          path: automation
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies (Automation)
+        working-directory: ./automation
+        run: npm install
+
+      - name: Install Playwright Browsers
+        working-directory: ./automation
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        working-directory: ./automation
+        run: npx playwright test
+        env:
+          BASE_URL: https://aitooldock.netlify.app # You can change this if needed
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: automation/playwright-report/
+          retention-days: 30
