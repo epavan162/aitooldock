@@ -5,6 +5,7 @@ import ToolDetailPage from './pages/ToolDetailPage';
 import AboutPage from './pages/AboutPage';
 import './styles/global.css';
 
+
 import { ThemeProvider } from './context/ThemeContext';
 import Background from './components/Background';
 
