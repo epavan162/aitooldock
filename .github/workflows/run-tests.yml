@@ -1,12 +1,26 @@
-name: Multi-Repo Playwright Tests
+name: Combined Test and Deploy Pipeline
+
 on:
   push:
-    branches: [main, master]
+    branches: ["main", "master"]
   pull_request:
-    branches: [main, master]
+    branches: ["main", "master"]
+
+# Permissions required for GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   test:
+    name: "Run Automation Tests"
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -20,8 +34,7 @@ jobs:
           AUTOMATION_TOKEN: ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}
         run: |
           if [ -z "$AUTOMATION_TOKEN" ]; then
-            echo "Error: AUTOMATION_TRIGGER_TOKEN secret is not set in this repository (epavan162/aitooldock)."
-            echo "Please ensure you have added it in Settings > Secrets and variables > Actions."
+            echo "Error: AUTOMATION_TRIGGER_TOKEN secret is not set in this repository."
             exit 1
           fi
           git clone https://x-access-token:$AUTOMATION_TOKEN@github.com/ShobhaRani133/playwright-typescript-aitoolhub.git automation
@@ -31,7 +44,7 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Install dependencies (Automation)
+      - name: Install Test Dependencies
         working-directory: ./automation
         run: npm install
 
@@ -43,7 +56,7 @@ jobs:
         working-directory: ./automation
         run: npx playwright test
         env:
-          BASE_URL: https://aitooldock.netlify.app # You can change this if needed
+          BASE_URL: https://aitooldock.netlify.app
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
@@ -51,3 +64,39 @@ jobs:
           name: playwright-report
           path: automation/playwright-report/
           retention-days: 30
+
+  deploy:
+    name: "Build and Deploy to GitHub Pages"
+    needs: test
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./build"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
